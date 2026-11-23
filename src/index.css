@@ -1,13 +1,91 @@
 *, *::before, *::after { box-sizing: border-box; }
 
+/* ── 색 토큰 ──────────────────────────────────────────────
+   사이트 전체 색은 여기서만 정함. index.html의 <html data-palette="…">만 바꾸면 통째로 바뀜.
+   새 팔레트는 아래 블록 하나 복사해서 이름·값만 바꾸면 됨.
+   --paper   페이지 바탕          --paper-2 섹션 바탕(살짝 진하게)
+   --sky     번진 배경 빛          --accent  메인 포인트(제목·버튼·그래프)
+   --pop     두 번째 포인트(소량)   --ink     본문 글자
+   --muted   보조 글자            --line    구분선
+   --strap   3D 사원증 끈 색 */
+:root,
+:root[data-palette='klein'] { /* 이브 클라인 블루 + 시그널 오렌지 (레퍼런스 ② 계열) */
+  --paper: #eef3fb;
+  --paper-2: #e3eaf7;
+  --sky: #a9c2f0;
+  --accent: #1a2cff;
+  --pop: #ff5b2e;
+  --ink: #0c0f2e;
+  --muted: #5d6585;
+  --line: #cfd7e8;
+  --strap: #172463;
+}
+:root[data-palette='tangerine'] { /* 에르메스 오렌지 + 딥 네이비 */
+  --paper: #fbf4ee;
+  --paper-2: #f5e9df;
+  --sky: #ffd2b8;
+  --accent: #f05a1a;
+  --pop: #1f3a93;
+  --ink: #2a1408;
+  --muted: #7d6150;
+  --line: #ead6c8;
+  --strap: #7a2a10;
+}
+:root[data-palette='lilac'] { /* 스트라이프 블러플 + 핫핑크 */
+  --paper: #f4f1ff;
+  --paper-2: #ebe5ff;
+  --sky: #d3c8ff;
+  --accent: #5b3cff;
+  --pop: #ff3d7f;
+  --ink: #150d3a;
+  --muted: #6a6390;
+  --line: #ddd5f5;
+  --strap: #2a1d73;
+}
+
+:root {
+  --display: 'Inter Tight', 'Helvetica Neue', Arial, sans-serif;
+  --serif: 'Instrument Serif', serif;
+  --type: 'Courier Prime', ui-monospace, monospace;
+}
+
 body {
   margin: 0;
-  background: #fff;
-  color: #000;
-  font-family: 'Instrument Serif', serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
 }
 
 a { color: inherit; }
 
 /* 카드 잡고 있는 동안만 도트 락앤롤 손. 핫스팟 = 검지 끝 */
 html.rock, html.rock * { cursor: url('./assets/rock.svg') 11 1, grabbing !important; }
+
+/* ── 섹션 공통 (레퍼런스 ①②③) ── */
+/* 종이 결 노이즈 + 번진 하늘빛. 섹션에 class="paper" */
+.paper { position: relative; isolation: isolate; }
+.paper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.35;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.55 0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* 섹션 머리: 타자기 번호 라벨(①) + 굵은 대문자 제목(②) */
+.eyebrow {
+  margin: 0 0 12px;
+  font: 700 13px/1 var(--type);
+  letter-spacing: 0.06em;
+  color: var(--accent);
+}
+.display {
+  margin: 0;
+  font: 900 clamp(48px, 9vw, 120px) / 0.85 var(--display);
+  letter-spacing: -0.045em;
+  text-transform: uppercase;
+  color: var(--accent);
+}

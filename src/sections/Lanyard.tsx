@@ -23,7 +23,6 @@ const STRAP_W = 0.2
 const CAP_LEAD = 0.22 // 캡 위 이만큼은 끈이 카드 위쪽 방향으로 곧게 들어감
 const CAP_TUCK = 0.05 // 끈 끝을 캡 안으로 밀어 넣는 깊이 (단면 안 보이게)
 const STRAP_T = 0.025 // 끈 두께
-const STRAP_COLOR = '#172463'
 const STRAP_TEX_LEN = 0.4 // 끈 텍스처 한 장이 덮는 길이 (unit)
 const RIBBON_STEPS = 48
 
@@ -341,7 +340,9 @@ function strapTexture() {
   const W = 64, H = 128 // 0.2 x STRAP_TEX_LEN unit
   const WARP = 4, WEFT = 3 // 세로실·가로실 굵기(px)
   const EDGE = 5 // 양쪽 테두리(셀비지) 폭
-  const base = [14, 22, 69] // 조명·반사로 밝아지는 만큼 어둡게 → 화면에선 STRAP_COLOR 근처
+  // 끈 색은 CSS 토큰 --strap (src/index.css). 조명·반사로 밝아지는 만큼 60%로 어둡게
+  const hex = getComputedStyle(document.documentElement).getPropertyValue('--strap').trim() || '#172463'
+  const base = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) * 0.6)
   const color = new ImageData(W, H), height = new ImageData(W, H)
   const hash = (n: number) => { const s = Math.sin(n * 127.1) * 43758.5453; return s - Math.floor(s) }
 

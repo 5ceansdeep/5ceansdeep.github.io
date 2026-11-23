@@ -38,9 +38,12 @@ export default function Projects() {
   }
 
   return (
-    <section id="projects" className={s.projects} aria-labelledby="projects-title">
+    <section id="projects" className={`paper ${s.projects}`} aria-labelledby="projects-title">
       <header className={s.header}>
-        <h2 id="projects-title" className={s.title}>Projects</h2>
+        <div>
+          <p className="eyebrow">01 — Selected Work</p>
+          <h2 id="projects-title" className="display">Projects.</h2>
+        </div>
         <div className={s.filters} role="group" aria-label="기술 스택 필터">
           {stacks.map((t) => (
             <button key={t} className={s.tag} aria-pressed={filter === t} onClick={() => setFilter(t)}>{t}</button>

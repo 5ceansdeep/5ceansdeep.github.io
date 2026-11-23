@@ -4,7 +4,7 @@ import s from './Landing.module.css'
 
 export default function Landing() {
   return (
-    <section className={s.landing}>
+    <section className={`paper ${s.landing}`}>
       <h1 className={s.name}>
         <span>{profile.firstName}</span> <span>{profile.lastName}</span>
       </h1>

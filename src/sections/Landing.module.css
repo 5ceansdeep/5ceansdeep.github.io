@@ -1,42 +1,27 @@
-/* 레퍼런스 믹스: ① 하늘색 번진 배경·타자기 라벨 ② 굵은 울트라마린 타이포 ③ 종이 결 */
+/* 레퍼런스 믹스: ① 번진 하늘빛 배경·타자기 라벨 ② 굵은 대문자 이름 ③ 종이 결 (종이 결은 전역 .paper)
+   색은 전부 src/index.css 토큰 */
 .landing {
-  --ultramarine: #1a2cff;
-  --sky: #7fa3e6;
-  --type: 'Courier Prime', ui-monospace, monospace;
-  position: relative;
   height: 100vh;
   min-height: 640px;
   overflow: hidden;
   background:
-    radial-gradient(55% 50% at 50% 38%, #8fb0ec 0%, #a9c2f0 35%, rgba(214, 227, 248, 0) 75%),
-    radial-gradient(40% 35% at 18% 70%, rgba(143, 176, 236, 0.6), transparent 70%),
-    radial-gradient(40% 35% at 85% 75%, rgba(143, 176, 236, 0.5), transparent 70%),
-    #eef3fb;
-  isolation: isolate;
-}
-/* 종이 결 노이즈 (③). 화면 전체에 아주 옅게 */
-.landing::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0.35;
-  mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.55 0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    radial-gradient(55% 50% at 50% 38%, color-mix(in srgb, var(--sky) 85%, var(--accent)) 0%, var(--sky) 35%, transparent 75%),
+    radial-gradient(40% 35% at 18% 70%, color-mix(in srgb, var(--sky) 60%, transparent), transparent 70%),
+    radial-gradient(40% 35% at 85% 75%, color-mix(in srgb, var(--sky) 50%, transparent), transparent 70%),
+    var(--paper);
 }
 
-/* 이름 (②): 아래쪽 두 줄, 굵은 울트라마린 고딕 */
+/* 이름 (②): 아래쪽 두 줄, 굵은 고딕 */
 .name {
   position: absolute;
   left: 2.5vw;
   bottom: 2vh;
   z-index: 3;
   margin: 0;
-  font: 900 min(19vw, 31vh) / 0.82 'Inter Tight', 'Helvetica Neue', Arial, sans-serif;
+  font: 900 min(19vw, 31vh) / 0.82 var(--display);
   letter-spacing: -0.045em;
   text-transform: uppercase;
-  color: var(--ultramarine);
+  color: var(--accent);
   white-space: nowrap;
   pointer-events: none;
 }
@@ -45,7 +30,7 @@
 .outline {
   z-index: 5;
   color: transparent;
-  -webkit-text-stroke: 2px var(--ultramarine);
+  -webkit-text-stroke: 2px var(--accent);
 }
 
 /* ① 타자기 라벨 */
@@ -55,13 +40,13 @@
   margin: 0;
   font: 700 15px/1 var(--type);
   letter-spacing: 0.04em;
-  color: var(--sky);
+  color: color-mix(in srgb, var(--accent) 45%, var(--sky));
   pointer-events: none;
 }
 .tl { top: 28px; left: 32px; }
 .tr { top: 28px; right: 32px; }
-.br { bottom: 28px; right: 32px; color: #fff; text-shadow: 0 1px 6px rgba(26, 44, 255, 0.4); }
-.hint { top: 60%; left: calc(50% + 150px); color: var(--ultramarine); }
+.br { bottom: 28px; right: 32px; color: #fff; text-shadow: 0 1px 6px color-mix(in srgb, var(--accent) 40%, transparent); }
+.hint { top: 60%; left: calc(50% + 150px); color: var(--pop); }
 
 .srOnly {
   position: absolute;
