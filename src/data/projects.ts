@@ -54,10 +54,12 @@ export const projects: Project[] = [
     name: 'Saymary',
     summary: 'AI 음성 요약 서비스',
     period: '2025.07 — 2025.09', // GitHub 레포 커밋 기간 기준
-    role: 'Frontend · ComWith 소모임',
+    role: 'Frontend · 웹 소모임 토이 프로젝트',
     stack: ['React', 'JavaScript', 'Create React App', 'Vercel'],
     github: 'https://github.com/5ceansdeep/saymary_frontend',
-    highlights: [],
+    highlights: [
+      '웹 개발 동아리 ComWith 소모임 토이 프로젝트, 소모임 내 최우수팀 선정',
+    ],
     cases: [],
   },
   {
@@ -78,7 +80,7 @@ export const projects: Project[] = [
   {
     name: '띠링인캠퍼스',
     summary: '흩어진 교내 공지를 한곳에서 보는 학내 공지 통합 플랫폼',
-    period: '2025', // 확인 필요: INU Startup Frontier(2025) 기준 추정
+    period: '2025.04 — 2026.01',
     role: 'Frontend · 기획 · 창업동아리 멋진으른',
     stack: ['React', 'Figma'],
     highlights: [
