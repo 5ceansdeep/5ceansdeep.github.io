@@ -2,45 +2,57 @@
 
 /* ── 색 토큰 ──────────────────────────────────────────────
    사이트 전체 색은 여기서만 정함. index.html의 <html data-palette="…">만 바꾸면 통째로 바뀜.
+   미리보기: 주소 뒤에 ?palette=acid 처럼 붙이면 그 팔레트로 열림.
    새 팔레트는 아래 블록 하나 복사해서 이름·값만 바꾸면 됨.
    --paper   페이지 바탕          --paper-2 섹션 바탕(살짝 진하게)
-   --sky     번진 배경 빛          --accent  메인 포인트(제목·버튼·그래프)
-   --pop     두 번째 포인트(소량)   --ink     본문 글자
-   --muted   보조 글자            --line    구분선
-   --strap   3D 사원증 끈 색 */
+   --sky     번진 배경 빛          --accent  메인 포인트(제목·버튼·그래프). 바탕 위 글자로 읽혀야 함
+   --pop     두 번째 포인트. 배경 칠하기 전용(태그·버튼 hover, 하이라이트). 그 위 글자는 --ink
+   --ink     본문 글자            --muted   보조 글자
+   --line    구분선               --strap   3D 사원증 끈 색 */
 :root,
-:root[data-palette='klein'] { /* 이브 클라인 블루 + 시그널 오렌지 (레퍼런스 ② 계열) */
+:root[data-palette='oxblood'] { /* 옥스블러드 + 머스터드, 본(bone) 종이. 에르메스 가죽·에디토리얼 잡지 */
+  --paper: #f4efe6;
+  --paper-2: #ece4d6;
+  --sky: #e8cdbd;
+  --accent: #6b1424;
+  --pop: #f0b429;
+  --ink: #1f1412;
+  --muted: #7a6760;
+  --line: #ddd0c0;
+  --strap: #4a0d18;
+}
+:root[data-palette='acid'] { /* 딥 포레스트 + 애시드 라임. 로빈후드·검로드 */
+  --paper: #f3f2ea;
+  --paper-2: #e9e8dc;
+  --sky: #dcef8a;
+  --accent: #16402a;
+  --pop: #c8f03c;
+  --ink: #0f1f16;
+  --muted: #5f6b60;
+  --line: #d6d8c6;
+  --strap: #16402a;
+}
+:root[data-palette='aubergine'] { /* 가지색 + 민트 */
+  --paper: #f4f1f5;
+  --paper-2: #ebe5ee;
+  --sky: #d8cbe3;
+  --accent: #3d1d4f;
+  --pop: #8fe3c4;
+  --ink: #1b1022;
+  --muted: #6d6175;
+  --line: #ddd3e3;
+  --strap: #2c1438;
+}
+:root[data-palette='klein'] { /* 이브 클라인 블루 + 시그널 오렌지 (예전 기본) */
   --paper: #eef3fb;
   --paper-2: #e3eaf7;
   --sky: #a9c2f0;
   --accent: #1a2cff;
-  --pop: #ff5b2e;
+  --pop: #ff8a5c;
   --ink: #0c0f2e;
   --muted: #5d6585;
   --line: #cfd7e8;
   --strap: #172463;
-}
-:root[data-palette='tangerine'] { /* 에르메스 오렌지 + 딥 네이비 */
-  --paper: #fbf4ee;
-  --paper-2: #f5e9df;
-  --sky: #ffd2b8;
-  --accent: #f05a1a;
-  --pop: #1f3a93;
-  --ink: #2a1408;
-  --muted: #7d6150;
-  --line: #ead6c8;
-  --strap: #7a2a10;
-}
-:root[data-palette='lilac'] { /* 스트라이프 블러플 + 핫핑크 */
-  --paper: #f4f1ff;
-  --paper-2: #ebe5ff;
-  --sky: #d3c8ff;
-  --accent: #5b3cff;
-  --pop: #ff3d7f;
-  --ink: #150d3a;
-  --muted: #6a6390;
-  --line: #ddd5f5;
-  --strap: #2a1d73;
 }
 
 :root {

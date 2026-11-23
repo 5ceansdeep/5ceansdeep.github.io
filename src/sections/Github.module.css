@@ -28,9 +28,9 @@
   white-space: nowrap;
   transition: background 0.15s, border-color 0.15s;
 }
-.btn:hover { background: var(--pop); border-color: var(--pop); }
+.btn:hover { background: var(--pop); border-color: var(--pop); color: var(--ink); }
 .ghost { background: transparent; color: var(--accent); }
-.ghost:hover { color: #fff; }
+.ghost:hover { color: var(--ink); }
 
 /* 숫자 */
 .stats {

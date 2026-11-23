@@ -34,7 +34,7 @@
   color: var(--muted);
   cursor: pointer;
 }
-.tag:hover { border-color: var(--pop); color: var(--pop); }
+.tag:hover { background: var(--pop); border-color: var(--pop); color: var(--ink); }
 .tag[aria-pressed='true'] { background: var(--accent); border-color: var(--accent); color: #fff; }
 
 /* 계단: 카드 간격 300px, 한 칸마다 84px 위로. 위 여백은 계단 칸 수만큼 */
@@ -176,7 +176,7 @@
 }
 a.btn:hover { background: var(--accent); color: #fff; }
 .btn.primary { background: var(--accent); color: #fff; }
-a.btn.primary:hover { background: var(--pop); border-color: var(--pop); }
+a.btn.primary:hover { background: var(--pop); border-color: var(--pop); color: var(--ink); }
 .btn.off { border-color: var(--line); border-style: dashed; background: none; color: var(--muted); cursor: default; }
 
 .more {
