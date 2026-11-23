@@ -1,0 +1,220 @@
+/* Figma PROJECT PANNEL 1280x832 + 참고 카드(image 1)를 250px 폭으로 */
+.projects {
+  position: relative;
+  min-height: 100vh;
+  background: #f0f2f5;
+  padding: 100px 64px 80px;
+  overflow-x: clip; /* 계단 + 등장 애니메이션이 가로 스크롤 만들지 않게 */
+}
+
+/* 제목 왼쪽, 필터 태그 오른쪽 한 줄 */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #d5d8de;
+}
+.title {
+  margin: 0;
+  font-size: 64px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+}
+.tag {
+  font: 11px/1 ui-monospace, 'SFMono-Regular', Consolas, monospace;
+  letter-spacing: 0.05em;
+  padding: 6px 10px;
+  border: 1px solid #bbb;
+  border-radius: 999px;
+  background: transparent;
+  color: #555;
+  cursor: pointer;
+}
+.tag[aria-pressed='true'] { background: #172463; border-color: #172463; color: #fff; }
+
+/* 계단: 카드 간격 300px, 한 칸마다 84px 위로. 위 여백은 계단 칸 수만큼 */
+.cards {
+  list-style: none;
+  margin: 0;
+  padding: calc(var(--steps, 0) * 84px + 48px) 0 0;
+  display: flex;
+  gap: 32px; /* 4장 + 여백이 1280 안에 들어오게 */
+}
+.card:nth-child(2) { transform: translateY(-84px); }
+.card:nth-child(3) { transform: translateY(-168px); }
+.card:nth-child(4) { transform: translateY(-252px); }
+
+/* 등장: 아래에서 페이드 인, 카드마다 120ms씩 늦게. 계단(transform)과 겹치지 않게 translate 사용 */
+.card {
+  opacity: 0;
+  translate: 0 80px;
+  transition: opacity 0.5s ease-out, translate 0.7s cubic-bezier(0.2, 0.9, 0.3, 1.15);
+  transition-delay: calc(var(--i) * 120ms);
+}
+.seen .card { opacity: 1; translate: 0 0; }
+@media (prefers-reduced-motion: reduce) {
+  .card { opacity: 1; translate: none; transition: none; }
+}
+
+.card {
+  position: relative;
+  flex: none;
+  width: 250px;
+  min-height: 400px; /* 내용이 길면 카드가 늘어남 */
+  padding: 44px 23px 18px;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 13px 5px 21.7px rgba(0, 0, 0, 0.25);
+}
+
+.slot {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  width: 46px;
+  height: 10px;
+  translate: -50% 0;
+  border-radius: 999px;
+  /* 뚫린 구멍: 섹션 배경색 + 안쪽 그림자로 카드 두께 표현 */
+  background: #f0f2f5;
+  box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.head { display: flex; justify-content: space-between; align-items: flex-start; }
+.no {
+  margin: 8px 0 0;
+  font: 10px/1 ui-monospace, 'SFMono-Regular', Consolas, monospace;
+  letter-spacing: 0.12em;
+  color: #777;
+  white-space: nowrap;
+}
+.thumb {
+  width: 72px;
+  height: 90px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #fafafa;
+  color: #888;
+  font-size: 11px;
+}
+.thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+.name {
+  margin: 14px 0 0;
+  text-wrap: balance;
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1.1;
+}
+.summary {
+  margin: 4px 0 0;
+  font-size: 13px;
+  font-style: italic;
+  color: #555;
+}
+
+.info { margin: 16px 0 0; }
+.info div {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 7px 0;
+  border-top: 1px solid #e3e3e3;
+}
+.info dt {
+  flex: none;
+  width: 44px;
+  font: 9px/1 ui-monospace, 'SFMono-Regular', Consolas, monospace;
+  letter-spacing: 0.08em;
+  color: #777;
+}
+.info dd { margin: 0; font-size: 14px; }
+
+.stack { display: flex; flex-wrap: wrap; gap: 4px; }
+.info .stack { white-space: normal; }
+.chip {
+  padding: 2px 6px;
+  border: 1px solid #ddd;
+  border-radius: 999px;
+  font-size: 12px;
+  line-height: 1.2;
+}
+.chipMore { border-style: dashed; color: #777; }
+
+.footer {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+  border-top: 1px solid #999;
+}
+.links { display: flex; gap: 6px; }
+.btn {
+  padding: 5px 11px;
+  border: 1px solid #172463;
+  border-radius: 999px;
+  font-size: 13px;
+  line-height: 1;
+  white-space: nowrap;
+  text-decoration: none;
+  color: #172463;
+  transition: background 0.15s, color 0.15s;
+}
+a.btn:hover { background: #172463; color: #fff; }
+.btn.primary { background: #172463; color: #fff; }
+a.btn.primary:hover { background: #0e1645; }
+.btn.off { border-color: #ccc; border-style: dashed; background: none; color: #aaa; cursor: default; }
+
+.more {
+  font: inherit;
+  font-size: 16px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #555;
+  cursor: pointer;
+}
+
+.dialog {
+  width: min(480px, calc(100vw - 32px));
+  padding: 32px;
+  border: 0;
+  border-radius: 5px;
+  box-shadow: 13px 5px 21.7px rgba(0, 0, 0, 0.25);
+}
+.dialog::backdrop { background: rgba(240, 242, 245, 0.8); }
+.dialog .footer { margin-top: 24px; }
+.meta { margin: 12px 0 8px; font-size: 14px; }
+.details { margin: 16px 0 0; padding-left: 18px; font-size: 14px; line-height: 1.6; }
+
+/* 문제 → 해결 → 결과. 카드의 PERIOD/ROLE 표 형식 재사용, 결과만 강조 */
+.dialog { max-height: calc(100vh - 32px); overflow-y: auto; }
+.case { margin-top: 28px; }
+.caseTitle { margin: 0; font-size: 20px; font-weight: 400; }
+.dialog .info dt { width: 64px; }
+.dialog .info dd { white-space: normal; font-size: 14px; line-height: 1.5; }
+.dialog .info .result { font-size: 18px; color: #172463; }
+
+/* 좁은 화면: 계단 풀고 세로로 */
+@media (max-width: 1100px) {
+  .projects { padding: 80px 16px; }
+  .filters { justify-content: flex-start; }
+  .cards { padding: 40px 0 0; flex-wrap: wrap; justify-content: center; gap: 32px; }
+  .card:nth-child(n) { transform: none; }
+}
