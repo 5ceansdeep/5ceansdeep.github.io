@@ -1,0 +1,134 @@
+/* GitHub 활동 패널. Figma 시안 없음 → 랜딩 톤(번진 하늘빛 + 굵은 제목 + 타자기 라벨) */
+.github {
+  padding: 120px 64px;
+  background:
+    radial-gradient(45% 40% at 85% 20%, color-mix(in srgb, var(--sky) 55%, transparent), transparent 70%),
+    var(--paper);
+}
+.inner { max-width: 1152px; }
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--line);
+}
+.actions { display: flex; gap: 8px; }
+.btn {
+  padding: 9px 16px;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font: 700 13px/1 var(--type);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.15s, border-color 0.15s;
+}
+.btn:hover { background: var(--pop); border-color: var(--pop); }
+.ghost { background: transparent; color: var(--accent); }
+.ghost:hover { color: #fff; }
+
+/* 숫자 */
+.stats {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 48px;
+  margin: 40px 0 28px;
+}
+.stat { margin: 0; display: grid; gap: 6px; }
+.n { font: 900 40px/0.9 var(--display); letter-spacing: -0.03em; color: var(--ink); }
+.big .n { font-size: clamp(64px, 10vw, 112px); color: var(--accent); }
+.statLabel { font: 700 12px/1 var(--type); letter-spacing: 0.05em; color: var(--muted); }
+
+/* 잔디 그래프 */
+.graph {
+  margin: 0;
+  padding: 24px;
+  background: #fff;
+  box-shadow: 8px 10px 24px color-mix(in srgb, var(--ink) 12%, transparent);
+}
+.scroll { overflow-x: auto; padding-bottom: 4px; }
+.months, .cells {
+  display: grid;
+  grid-auto-columns: 12px;
+  gap: 3px;
+  width: max-content;
+}
+.months {
+  grid-auto-flow: column;
+  margin-bottom: 6px;
+  font: 400 11px/1 var(--type);
+  color: var(--muted);
+}
+.months span { white-space: nowrap; }
+.cells { grid-template-rows: repeat(7, 12px); grid-auto-flow: column; }
+.cell {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  background: var(--line);
+}
+.cell[data-level='1'] { background: color-mix(in srgb, var(--accent) 25%, var(--paper)); }
+.cell[data-level='2'] { background: color-mix(in srgb, var(--accent) 50%, var(--paper)); }
+.cell[data-level='3'] { background: color-mix(in srgb, var(--accent) 75%, var(--paper)); }
+.cell[data-level='4'] { background: var(--accent); }
+.legend {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 4px;
+  margin-top: 12px;
+  font: 400 11px/1 var(--type);
+  color: var(--muted);
+}
+
+/* 최근 레포 */
+.repos {
+  list-style: none;
+  margin: 28px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+.repo {
+  height: 100%;
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  padding: 18px 20px;
+  background: #fff;
+  border-top: 3px solid var(--accent);
+  text-decoration: none;
+  transition: translate 0.2s, border-color 0.2s;
+}
+.repo:hover { translate: 0 -4px; border-color: var(--pop); }
+.repoName { font: 800 18px/1.2 var(--display); letter-spacing: -0.02em; color: var(--ink); }
+.repoDesc { font-size: 15px; line-height: 1.4; color: var(--muted); }
+.repoMeta { font: 400 11px/1 var(--type); color: var(--muted); }
+
+/* 불러오는 중 · 실패 대체 화면 */
+.placeholder {
+  display: grid;
+  justify-items: start;
+  gap: 8px;
+  margin-top: 40px;
+  padding: 40px;
+  background: #fff;
+  border: 1px dashed var(--line);
+  font-size: 17px;
+  color: var(--muted);
+}
+.placeholder p { margin: 0; }
+.fallbackTitle { font: 800 22px/1.2 var(--display); color: var(--ink); }
+.placeholder .btn { margin-top: 12px; }
+
+@media (max-width: 700px) {
+  .github { padding: 80px 16px; }
+}
