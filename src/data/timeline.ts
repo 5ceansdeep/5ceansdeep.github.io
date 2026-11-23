@@ -16,9 +16,9 @@ export const timeline: Event[] = [
   },
   {
     date: '2026.10',
-    title: 'Hackathon · Frontend',
-    org: 'RedTeam Orchestrator',
-    desc: '멀티 에이전트 LLM 레드팀 도구의 프론트엔드 담당',
+    title: 'Hackathon · Frontend Prototype',
+    org: 'Adaptive Red Team',
+    desc: '여러 AI가 보안 점검을 나눠 맡는 아이디어를 보여주기 위한 시연용 프론트엔드 화면 구성',
   },
   {
     date: '2025.04 — 2026.01',
