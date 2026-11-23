@@ -1,4 +1,4 @@
-import { timeline } from '../data/timeline.ts'
+import { credentials, timeline } from '../data/timeline.ts'
 import s from './Timeline.module.css'
 
 export default function Timeline() {
@@ -9,16 +9,20 @@ export default function Timeline() {
         <h2 id="timeline-title" className="display">History.</h2>
       </div>
       <ol className={s.list}>
-        {timeline.filter((e) => e.date).map((e) => (
+        {timeline.map((e) => (
           <li key={e.date + e.title} className={s.item}>
             <time className={s.date}>{e.date}</time>
             <div>
-              <p className={s.name}>{e.title}</p>
-              {e.desc && <p className={s.desc}>{e.desc}</p>}
+              <p className={s.title}>{e.title}</p>
+              <p className={s.org}>{e.org}</p>
+              <p className={s.desc}>{e.desc}</p>
             </div>
           </li>
         ))}
       </ol>
+      <p className={s.credentials}>
+        {credentials.map((c) => <span key={c}>{c}</span>)}
+      </p>
     </section>
   )
 }
