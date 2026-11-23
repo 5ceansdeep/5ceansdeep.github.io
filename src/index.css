@@ -1,0 +1,13 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: #fff;
+  color: #000;
+  font-family: 'Instrument Serif', serif;
+}
+
+a { color: inherit; }
+
+/* 카드 잡고 있는 동안만 도트 락앤롤 손. 핫스팟 = 검지 끝 */
+html.rock, html.rock * { cursor: url('./assets/rock.svg') 11 1, grabbing !important; }
