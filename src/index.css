@@ -1,8 +1,9 @@
 *, *::before, *::after { box-sizing: border-box; }
 
 /* ── 색 토큰 ──────────────────────────────────────────────
-   사이트 전체 색은 여기서만 정함. index.html의 <html data-palette="…">만 바꾸면 통째로 바뀜.
-   미리보기: 주소 뒤에 ?palette=acid 처럼 붙이면 그 팔레트로 열림.
+   사이트 전체 색은 여기서만 정함. 기본값은 index.html의 <html data-palette="…">.
+   방문자는 오른쪽 아래 Color 버튼으로 바꿀 수 있고(마지막 선택 기억), 주소 뒤 ?palette=acid 로도 열림.
+   팔레트 추가: 아래 블록 복사 + src/palette.ts 목록에 한 줄.
    새 팔레트는 아래 블록 하나 복사해서 이름·값만 바꾸면 됨.
    --paper   페이지 바탕          --paper-2 섹션 바탕(살짝 진하게)
    --sky     번진 배경 빛          --accent  메인 포인트(제목·버튼·그래프). 바탕 위 글자로 읽혀야 함
@@ -10,7 +11,7 @@
    --ink     본문 글자            --muted   보조 글자
    --line    구분선               --strap   3D 사원증 끈 색 */
 :root,
-:root[data-palette='oxblood'] { /* 옥스블러드 + 머스터드, 본(bone) 종이. 에르메스 가죽·에디토리얼 잡지 */
+[data-palette='oxblood'] { /* 옥스블러드 + 머스터드, 본(bone) 종이. 에르메스 가죽·에디토리얼 잡지 */
   --paper: #f4efe6;
   --paper-2: #ece4d6;
   --sky: #e8cdbd;
@@ -21,7 +22,7 @@
   --line: #ddd0c0;
   --strap: #4a0d18;
 }
-:root[data-palette='acid'] { /* 딥 포레스트 + 애시드 라임. 로빈후드·검로드 */
+[data-palette='acid'] { /* 딥 포레스트 + 애시드 라임. 로빈후드·검로드 */
   --paper: #f3f2ea;
   --paper-2: #e9e8dc;
   --sky: #dcef8a;
@@ -32,7 +33,7 @@
   --line: #d6d8c6;
   --strap: #16402a;
 }
-:root[data-palette='aubergine'] { /* 가지색 + 민트 */
+[data-palette='aubergine'] { /* 가지색 + 민트 */
   --paper: #f4f1f5;
   --paper-2: #ebe5ee;
   --sky: #d8cbe3;
@@ -43,7 +44,7 @@
   --line: #ddd3e3;
   --strap: #2c1438;
 }
-:root[data-palette='klein'] { /* 이브 클라인 블루 + 시그널 오렌지 (예전 기본) */
+[data-palette='klein'] { /* 이브 클라인 블루 + 시그널 오렌지 (예전 기본) */
   --paper: #eef3fb;
   --paper-2: #e3eaf7;
   --sky: #a9c2f0;

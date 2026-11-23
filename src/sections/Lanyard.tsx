@@ -1,4 +1,4 @@
-import { useMemo, useRef, type RefObject } from 'react'
+import { useEffect, useMemo, useRef, useState, type RefObject } from 'react'
 import * as THREE from 'three'
 import { Canvas, useFrame, type ThreeEvent } from '@react-three/fiber'
 import { Environment, Lightformer, RoundedBox } from '@react-three/drei'
@@ -83,7 +83,15 @@ type Grab = { local: THREE.Vector3; x: number; y: number; moved: boolean }
 
 function Badge() {
   const card = useRef<RapierRigidBody>(null) as BodyRef
-  const strapTex = useMemo(strapTexture, [])
+  // 팔레트 버튼으로 <html data-palette>가 바뀌면 끈 텍스처를 새 --strap 색으로 다시 만듦
+  const [palette, setPalette] = useState(document.documentElement.dataset.palette)
+  useEffect(() => {
+    const mo = new MutationObserver(() => setPalette(document.documentElement.dataset.palette))
+    mo.observe(document.documentElement, { attributes: true, attributeFilter: ['data-palette'] })
+    return () => mo.disconnect()
+  }, [])
+  const strapTex = useMemo(strapTexture, [palette])
+  useEffect(() => () => { strapTex.map.dispose(); strapTex.bump.dispose() }, [strapTex])
   const left = useStrap(-1, card, strapTex)
   const right = useStrap(1, card, strapTex)
   const geo = useMemo(() => ({ body: cardGeometry(), face: faceGeometry() }), [])

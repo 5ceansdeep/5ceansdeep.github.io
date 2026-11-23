@@ -45,7 +45,7 @@
 }
 .tl { top: 28px; left: 32px; }
 .tr { top: 28px; right: 32px; }
-.br { bottom: 28px; right: 32px; color: #fff; text-shadow: 0 1px 6px color-mix(in srgb, var(--accent) 40%, transparent); }
+.br { bottom: 76px; right: 32px; /* 아래는 Color 버튼 자리 */ color: #fff; text-shadow: 0 1px 6px color-mix(in srgb, var(--accent) 40%, transparent); }
 .hint { top: 60%; left: calc(50% + 150px); padding: 5px 8px; background: var(--pop); color: var(--ink); }
 
 .srOnly {

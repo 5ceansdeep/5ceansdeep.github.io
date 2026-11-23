@@ -2,6 +2,7 @@ import Landing from './sections/Landing.tsx'
 import Projects from './sections/Projects.tsx'
 import Timeline from './sections/Timeline.tsx'
 import Github from './sections/Github.tsx'
+import PaletteSwitch from './sections/PaletteSwitch.tsx'
 
 export default function App() {
   return (
@@ -10,6 +11,7 @@ export default function App() {
       <Projects />
       <Github />
       <Timeline />
+      <PaletteSwitch />
     </main>
   )
 }
