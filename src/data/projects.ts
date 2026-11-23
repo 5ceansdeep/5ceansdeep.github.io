@@ -58,7 +58,7 @@ export const projects: Project[] = [
     stack: ['React', 'JavaScript', 'Create React App', 'Vercel'],
     github: 'https://github.com/5ceansdeep/saymary_frontend',
     highlights: [
-      '웹 개발 동아리 ComWith 소모임 토이 프로젝트, 소모임 내 최우수팀 선정',
+      '웹 개발 동아리 ComWith 소모임 토이 프로젝트, 소규모 프로젝트 최우수 선정',
     ],
     cases: [],
   },

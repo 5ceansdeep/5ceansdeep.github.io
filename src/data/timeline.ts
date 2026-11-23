@@ -28,9 +28,9 @@ export const timeline: Event[] = [
   },
   {
     date: '2025.07 — 2025.09',
-    title: 'Frontend Team · 최우수팀',
+    title: 'Frontend Team · 소규모 프로젝트 최우수',
     org: '웹 개발 동아리 ComWith',
-    desc: '소모임 토이 프로젝트 Saymary(AI 음성 요약) 프론트엔드 개발, 소모임 내 최우수팀 선정',
+    desc: '소모임 토이 프로젝트 Saymary(AI 음성 요약) 프론트엔드 개발, 소규모 프로젝트 최우수 선정',
   },
 ]
 
