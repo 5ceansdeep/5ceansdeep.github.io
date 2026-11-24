@@ -15,6 +15,9 @@ export type Project = {
   thumbnail?: string // public/ 기준 경로
   github?: string
   live?: string
+  // 상세 보기 맨 위 영상. 유튜브 주소 또는 public/ 기준 mp4·webm 경로.
+  // ''(빈 문자열) = 자리만 두고 "준비 중" 표시, 아예 안 쓰면 영상 칸 없음
+  video?: string
   highlights: string[] // 상세 보기: 주요 구현 한 줄씩
   cases: Case[] // 상세 보기: 문제 → 해결 → 결과 (1~2개)
 }
@@ -28,6 +31,7 @@ export const projects: Project[] = [
     stack: ['Next.js', 'React Three Fiber', 'NestJS', 'TypeScript', 'React', 'Zustand', 'Tailwind CSS', 'Prisma', 'PostgreSQL', 'Gemini API', 'Vercel', 'Railway'],
     github: 'https://github.com/5ceansdeep/cabinet',
     // live: 'https://cabinet-flame-zeta.vercel.app', // 서버 다시 켜면 주석 해제
+    video: '', // 졸업작품 발표 영상 주소 넣기
     highlights: [
       '상황·기분을 적은 편지를 받아 곡 10개를 3D 디스크로 돌려줌',
       'Gemini 임베딩으로 861곡 중 30곡을 고르고 LLM으로 재정렬하는 2단계 추천',

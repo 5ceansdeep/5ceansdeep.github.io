@@ -88,6 +88,7 @@ export default function Projects() {
       <dialog ref={dialog} className={s.dialog} onClose={() => setOpen(null)} closedby="any">
         {open && (
           <>
+            {open.video !== undefined && <Video src={open.video} title={`${open.name} 발표 영상`} />}
             <p className={s.no}>PROJECT No.{no(projects.indexOf(open))}</p>
             <h3 className={s.name}>{open.name}</h3>
             <p className={s.summary}>{open.summary}</p>
@@ -124,6 +125,30 @@ function Links({ p }: { p: Project }) {
       {p.live
         ? <a className={`${s.btn} ${s.primary}`} href={p.live} target="_blank" rel="noreferrer">Live ↗</a>
         : <span className={`${s.btn} ${s.off}`} aria-disabled="true">Live</span>}
+    </div>
+  )
+}
+
+// 유튜브(watch·youtu.be·shorts·embed 주소) → 유튜브 플레이어, 그 외 경로 → <video>. 비어 있으면 자리만
+function youtubeId(src: string) {
+  try {
+    const u = new URL(src)
+    if (u.hostname === 'youtu.be') return u.pathname.slice(1)
+    if (!u.hostname.endsWith('youtube.com')) return null
+    return u.searchParams.get('v') ?? u.pathname.split('/').find((_, i, a) => a[i - 1] === 'embed' || a[i - 1] === 'shorts') ?? null
+  } catch {
+    return null // 상대 경로(public/ 파일)
+  }
+}
+
+function Video({ src, title }: { src: string; title: string }) {
+  if (!src) return <div className={`${s.video} ${s.videoEmpty}`}>▶ 발표 영상 준비 중</div>
+  const id = youtubeId(src)
+  return (
+    <div className={s.video}>
+      {id
+        ? <iframe src={`https://www.youtube-nocookie.com/embed/${id}`} title={title} allow="encrypted-media; picture-in-picture; fullscreen" allowFullScreen loading="lazy" />
+        : <video src={src} controls preload="metadata" aria-label={title} />}
     </div>
   )
 }
