@@ -26,9 +26,8 @@ export const aiCases: AiCase[] = [
     points: [
       '코드를 짜는 AI와 검토하는 AI를 서브에이전트로 나눠 검토를 맡김',
       '화면 흐름은 Playwright로 먼저 자동 검증하고, 실제 사용자 흐름은 직접 확인',
-      'AI가 한 줄이면 될 수정을 여러 파일에 걸쳐 고치지 않게 도구로 막음',
     ],
-    tools: ['서브에이전트', 'Playwright', 'ponytail'],
+    tools: ['서브에이전트', 'Playwright'],
   },
   {
     where: '현장실습',

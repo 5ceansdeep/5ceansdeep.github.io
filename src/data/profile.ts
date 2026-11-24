@@ -3,7 +3,8 @@ export const profile = {
   firstName: 'OH',
   lastName: 'SOOHYUN',
   role: ['frontend', 'developer'],
-  photo: '', // public/ 에 사진 넣고 '/profile.jpg' 식으로
+  photo: '/profile.jpg', // public/profile.jpg
+  email: 'su5653@naver.com', // 맨 아래 Contact 줄
   github: '5ceansdeep', // GitHub 활동 패널이 이 계정을 불러옴
   links: [
     { label: 'GitHub', href: 'https://github.com/5ceansdeep' },
