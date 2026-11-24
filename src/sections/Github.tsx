@@ -46,7 +46,7 @@ export default function Github() {
   return (
     <section id="github" className={`paper ${s.github}`} aria-labelledby="github-title">
       <div className={s.inner}>
-        <p className="eyebrow">02 — Activity</p>
+        <p className="eyebrow">03 — Activity</p>
         <div className={s.head}>
           <h2 id="github-title" className="display">GitHub.</h2>
           <div className={s.actions}>

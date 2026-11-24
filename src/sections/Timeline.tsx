@@ -5,7 +5,7 @@ export default function Timeline() {
   return (
     <section className={`paper ${s.timeline}`} aria-labelledby="timeline-title">
       <div className={s.head}>
-        <p className="eyebrow">03 — History</p>
+        <p className="eyebrow">04 — History</p>
         <h2 id="timeline-title" className="display">History.</h2>
       </div>
       <ol className={s.list}>
