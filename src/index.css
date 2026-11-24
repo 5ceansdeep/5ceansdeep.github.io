@@ -57,11 +57,9 @@
 }
 
 :root {
-  /* 폰트는 Inter 하나로 통일. 한글은 Pretendard (Inter와 모양이 비슷함) */
-  --font: 'Inter', 'Pretendard Variable', Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
-  --display: var(--font);
-  --serif: var(--font);
-  --type: var(--font);
+  --display: 'Inter Tight', 'Helvetica Neue', Arial, sans-serif;
+  --serif: 'Instrument Serif', serif;
+  --type: 'Courier Prime', ui-monospace, monospace;
 }
 
 body {
