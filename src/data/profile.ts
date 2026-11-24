@@ -9,4 +9,14 @@ export const profile = {
     { label: 'GitHub', href: 'https://github.com/5ceansdeep' },
     { label: 'Blog', href: 'https://velog.io/@5ceansdeep/posts' },
   ],
+  // 사원증 뒷면. 공개 사이트라 연락처·회사명은 넣지 않음
+  back: {
+    fields: [
+      { label: 'ROLE', value: 'Frontend Developer' },
+      { label: 'BASED IN', value: 'Seoul, KR' },
+      { label: 'STACK', value: 'React · TypeScript · R3F' },
+      { label: 'AVAILABLE', value: '2027.01 —' },
+    ],
+    returnTo: '5ceansdeep.github.io',
+  },
 }
