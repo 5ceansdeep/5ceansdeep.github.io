@@ -7,7 +7,7 @@ const CONTRIB_API = `https://github-contributions-api.jogruber.de/v4/${profile.g
 const USER_API = `https://api.github.com/users/${profile.github}`
 const REPOS_API = `https://api.github.com/users/${profile.github}/repos?sort=pushed&per_page=20`
 const PROFILE_URL = `https://github.com/${profile.github}`
-const SHOW_REPOS = ['cabinet', 'DRIFT', 'saymary_frontend'] // 보여줄 레포를 직접 고름 (순서대로)
+const SHOW_REPOS = ['cabinet'] // 보여줄 레포를 직접 고름 (순서대로)
 
 type Day = { date: string; count: number; level: number }
 type Repo = { name: string; description: string | null; language: string | null; html_url: string; pushed_at: string; fork: boolean }
