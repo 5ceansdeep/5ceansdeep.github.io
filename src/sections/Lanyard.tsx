@@ -101,6 +101,7 @@ function Badge() {
   const right = useStrap(1, card, strapTex)
   const geo = useMemo(() => ({ body: cardGeometry(), face: faceGeometry() }), [])
   const face = useFace()
+  const back = useBack()
   const grab = useRef<Grab | null>(null)
   const kicked = useRef(false)
   const tmp = useMemo(() => ({
@@ -193,6 +194,11 @@ function Badge() {
           {/* 앞면 인쇄. 텍스처라서 조명·코팅 반사를 같이 받음 */}
           <mesh name="face" geometry={geo.face} position-z={CARD.d / 2 + 0.0008} receiveShadow>
             <meshPhysicalMaterial map={face.tex} roughness={0.6} clearcoat={0.5} clearcoatRoughness={0.15} />
+          </mesh>
+
+          {/* 뒷면 인쇄. 앞면과 같은 판을 뒤집어 붙임 (뒤에서 보면 글자가 바로 읽힘) */}
+          <mesh geometry={geo.face} position-z={-(CARD.d / 2 + 0.0008)} rotation-y={Math.PI} receiveShadow>
+            <meshPhysicalMaterial map={back} roughness={0.6} clearcoat={0.5} clearcoatRoughness={0.15} />
           </mesh>
 
           {/* 플라스틱 클립 (Figma 618,211 44x49): 앞판·뒷판이 구멍을 통과해 이어짐 */}
@@ -345,6 +351,69 @@ function useFace() {
     }
     return { tex, hit }
   }, [])
+}
+
+// 카드 뒷면: 실제 사원증 뒷면처럼 '주우면 돌려주세요' + 항목 몇 줄 + 바코드. 내용은 profile.back
+function useBack() {
+  const tex = useMemo(() => {
+    const W = 324, H = 435, S = 4
+    const c = document.createElement('canvas')
+    c.width = W * S
+    c.height = H * S
+    const g = c.getContext('2d')!
+    const t = new THREE.CanvasTexture(c)
+    t.colorSpace = THREE.SRGBColorSpace
+    t.anisotropy = 8
+    const serif = (px: number) => `${px}px "Instrument Serif", serif`
+    const mono = (px: number, w = 400) => `${w} ${px}px "Courier Prime", monospace`
+
+    const draw = () => {
+      g.setTransform(S, 0, 0, S, 0, 0)
+      g.fillStyle = '#fff'
+      g.fillRect(0, 0, W, H)
+      g.fillStyle = '#000'
+      g.textBaseline = 'top'
+
+      // 윗부분은 끈 구멍 자리라 비워 둠
+      g.font = mono(11, 700)
+      g.fillText('IF FOUND, PLEASE RETURN TO', 34, 74)
+      g.font = serif(26)
+      g.fillText(profile.back.returnTo, 34, 92)
+      g.fillStyle = '#ccc'
+      g.fillRect(34, 132, W - 68, 1)
+
+      let y = 150
+      for (const { label, value } of profile.back.fields) {
+        g.fillStyle = '#888'
+        g.font = mono(10, 700)
+        g.fillText(label, 34, y)
+        g.fillStyle = '#000'
+        g.font = serif(20)
+        g.fillText(value, 34, y + 14)
+        y += 44
+      }
+
+      // 바코드: 이름으로 만든 고정 패턴 (매번 같은 모양)
+      const seed = `${profile.firstName}${profile.lastName}`
+      let x = 34, i = 0
+      while (x < W - 34) {
+        const code = seed.charCodeAt(i % seed.length) + i * 7
+        const w = 1 + (code % 3)
+        if (i % 2 === 0) { g.fillStyle = '#000'; g.fillRect(x, 352, w, 40) }
+        x += w + 1 + ((code >> 2) % 2)
+        i++
+      }
+      g.font = mono(10)
+      g.fillText(`${profile.firstName} ${profile.lastName} · ${new Date().getFullYear()}`, 34, 398)
+      t.needsUpdate = true
+    }
+
+    draw()
+    Promise.all([document.fonts.load(serif(20)), document.fonts.load(mono(10))]).then(draw)
+    return t
+  }, [])
+  useEffect(() => () => tex.dispose(), [tex])
+  return tex
 }
 
 // 끈 텍스처: 폴리에스터 2/1 능직. 세로실(끈 길이 방향)·가로실이 엇갈려 사선 결이 생김.
