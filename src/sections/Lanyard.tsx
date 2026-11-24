@@ -3,7 +3,7 @@ import * as THREE from 'three'
 import { Canvas, useFrame, type ThreeEvent } from '@react-three/fiber'
 import { Environment, Lightformer, RoundedBox } from '@react-three/drei'
 import {
-  Physics, RigidBody, BallCollider, CuboidCollider, useSphericalJoint,
+  Physics, RigidBody, BallCollider, CuboidCollider, useSphericalJoint, interactionGroups,
   type RapierRigidBody, type RigidBodyProps,
 } from '@react-three/rapier'
 import { profile } from '../data/profile.ts'
@@ -17,10 +17,11 @@ const SLOT = { w: 0.587, h: 0.153, y: CARD.h / 2 - 0.179 } // 카드 윗부분 �
 const ANCHOR = { x: 2.91, y: 6.96 } // 화면 위로 숨은 끈 고정점
 const JOINT = 0.565 // 카드 윗변에서 끈이 모이는 금속 캡까지 높이 (Figma V 꼭짓점 y≈182)
 // 끈 마디 수. 마디 길이는 고정(고정점~금속 캡 직선거리 ÷ 마디 수)이라 끈 전체 길이가 절대 안 변함
-const SEGMENTS = 10 // 많을수록 천처럼 부드럽게 휨
+const SEGMENTS = 16 // 많을수록 천처럼 부드럽게 휨. 마디 사이가 넓으면 그 틈으로 끈이 카드를 뚫고 지나감
 const STRAP_SAG = 0.25 // 처음 끈이 늘어진 정도(unit). 이만큼 여유 길이가 생겨 천처럼 늘어지고 흔들림
 const STRAP_W = 0.2
-const CAP_LEAD = 0.22 // 캡 위 이만큼은 끈이 카드 위쪽 방향으로 곧게 들어감
+const CAP_LEAD = 0.12 // 캡 위 이만큼은 끈이 곧게 들어감
+const CAP_STRAIGHTEN = 0.35 // 들어가는 방향: 0이면 끈이 오던 방향 그대로(V자), 1이면 카드 위쪽으로 똑바로(꺾임)
 const CAP_TUCK = 0.05 // 끈 끝을 캡 안으로 밀어 넣는 깊이 (단면 안 보이게)
 const STRAP_T = 0.025 // 끈 두께
 const STRAP_TEX_LEN = 0.4 // 끈 텍스처 한 장이 덮는 길이 (unit)
@@ -38,6 +39,10 @@ const INTRO_KICK = { x: 0.5, y: 0, z: 0 } // 처음 접속할 때 옆으로 살�
 const PULL_STIFFNESS = 150 // 높을수록 커서를 빨리 따라옴
 const PULL_DAMPING = 22 // 높을수록 따라올 때 덜 출렁임 (임계 감쇠 ≈ 2√STIFFNESS)
 const CLICK_SLOP = 5 // px, 이보다 덜 움직이면 클릭
+const SEG_RADIUS = 0.11 // 끈 마디 충돌 반경. 카드에 부딪히는 두께
+// 충돌 그룹: 끈 마디(0)는 카드(1)하고만 부딪힘. 끈끼리는 안 부딪혀야 엉키지 않음
+const STRAP_GROUP = interactionGroups(0, [1])
+const CARD_GROUP = interactionGroups(1, [0])
 
 type BodyRef = RefObject<RapierRigidBody>
 
@@ -176,7 +181,7 @@ function Badge() {
         ref={card} {...segProps} position={[0, CARD_Y, 0]}
         linearDamping={CARD_DAMPING} angularDamping={CARD_ANGULAR_DAMPING}
       >
-        <CuboidCollider args={[CARD.w / 2, CARD.h / 2, CARD.d / 2]} />
+        <CuboidCollider args={[CARD.w / 2, CARD.h / 2, CARD.d / 2]} collisionGroups={CARD_GROUP} friction={0.2} />
         <group
           onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp}
           onPointerOut={() => { document.body.style.cursor = '' }}
@@ -428,7 +433,7 @@ function useStrap(side: -1 | 1, card: BodyRef, tex: ReturnType<typeof strapTextu
       geo,
       // 마디 위치 + 캡 바로 위 보조점 1개: 끈이 캡에 사선으로 꽂히지 않고 똑바로 들어가게
       curve: new THREE.CatmullRomCurve3([...refs, null].map(() => new THREE.Vector3()), false, 'chordal'),
-      up: new THREE.Vector3(),
+      up: new THREE.Vector3(), lead: new THREE.Vector3(),
       p: new THREE.Vector3(), tan: new THREE.Vector3(), side: new THREE.Vector3(), n: new THREE.Vector3(),
       cardX: new THREE.Vector3(), corners: [0, 1, 2, 3].map(() => new THREE.Vector3()),
     }
@@ -439,10 +444,12 @@ function useStrap(side: -1 | 1, card: BodyRef, tex: ReturnType<typeof strapTextu
     if (refs.some((b) => !b.current)) return
     const pts = r.curve.points
     refs.forEach((b, i) => pts[i].copy(b.current.translation() as THREE.Vector3))
-    // 마지막 마디(=캡 위치)를 보조점으로 옮기고, 끝점은 캡 안쪽으로 살짝 밀어 넣음
+    // 마지막 마디(=캡 위치)를 보조점으로 옮기고, 끝점은 캡 안쪽으로 살짝 밀어 넣음.
+    // 보조점 방향은 끈이 오던 방향과 카드 위쪽 사이 → 캡 바로 위에서 갑자기 꺾이지 않음
     r.up.set(0, 1, 0).applyQuaternion(cardRot)
+    r.lead.subVectors(pts[SEGMENTS - 1], pts[SEGMENTS]).normalize().lerp(r.up, CAP_STRAIGHTEN).normalize()
     pts[SEGMENTS + 1].copy(pts[SEGMENTS]).addScaledVector(r.up, -CAP_TUCK)
-    pts[SEGMENTS].addScaledVector(r.up, CAP_LEAD)
+    pts[SEGMENTS].addScaledVector(r.lead, CAP_LEAD)
     r.curve.updateArcLengths()
     const len = r.curve.getLength()
     r.cardX.set(1, 0, 0).applyQuaternion(cardRot)
@@ -485,7 +492,7 @@ function useStrap(side: -1 | 1, card: BodyRef, tex: ReturnType<typeof strapTextu
       ? <RigidBody key={i} ref={ref} type="fixed" position={at(0)} />
       : (
         <RigidBody key={i} ref={ref} {...segProps} position={at(i / SEGMENTS)}>
-          <BallCollider args={[0.1]} mass={SEG_MASS} sensor />
+          <BallCollider args={[SEG_RADIUS]} mass={SEG_MASS} collisionGroups={STRAP_GROUP} friction={0.2} />
         </RigidBody>
       ),
   )

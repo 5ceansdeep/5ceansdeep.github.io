@@ -28,7 +28,7 @@ export default function Landing() {
 
       <p className={`${s.label} ${s.tl}`}>Built By</p>
       <p className={`${s.label} ${s.tr}`}>“5ceansdeep”</p>
-      <p className={`${s.label} ${s.hint}`}>드래그해 보세요 ↙</p>
+      <p className={`${s.label} ${s.hint}`}>drag me ↙</p>
       <p className={`${s.label} ${s.br}`}>2026 Frontend Works</p>
     </section>
   )
