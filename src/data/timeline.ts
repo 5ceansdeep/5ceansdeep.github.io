@@ -10,7 +10,7 @@ export type Event = {
 export const timeline: Event[] = [
   {
     date: '2026.08 — 현재',
-    title: 'SI Developer · 일학습병행',
+    title: 'SI Developer · 일학습병행(OJT)',
     org: 'IT 서비스 기업 현장실습',
     desc: '건설사업관리시스템(PMIS) 구축 프로젝트에서 레거시 시스템 기능 확장을 맡음. 요구사항을 규칙으로 정리해 AI 코딩 도구로 구현하고, 자동 화면 테스트와 직접 검토로 확인. 회사 코드·화면은 공개하지 않음',
   },
