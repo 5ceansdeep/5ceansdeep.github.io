@@ -283,7 +283,7 @@ function useFace() {
     tex.anisotropy = 8
     const links: { x: number; y: number; w: number; h: number; href: string }[] = []
     let photo: HTMLImageElement | undefined
-    const serif = (px: number, w = 500) => `${w} ${px}px Inter, "Pretendard Variable", sans-serif`
+    const serif = (px: number) => `${px}px "Instrument Serif", serif`
 
     const draw = () => {
       g.setTransform(S, 0, 0, S, 0, 0)
@@ -295,7 +295,7 @@ function useFace() {
       g.lineWidth = 0.5
       // 가는 세리프가 작은 카드에서 흐려지지 않게 획을 살짝 두껍게
       const text = (t: string, x: number, y: number) => { g.strokeStyle = g.fillStyle; g.fillText(t, x, y); g.strokeText(t, x, y) }
-      g.font = serif(28)
+      g.font = serif(30)
       profile.role.forEach((r, i) => text(r, 34, 59 + i * 36))
 
       const px = W - 34 - 104, py = 59
@@ -323,7 +323,7 @@ function useFace() {
       g.fillStyle = '#ccc'
       g.fillRect(34, 313, W - 68, 1)
       g.fillStyle = '#000'
-      g.font = serif(34, 600)
+      g.font = serif(40)
       text(`${profile.firstName} ${profile.lastName}`, 34, 329)
 
       g.font = serif(20)
@@ -365,8 +365,8 @@ function useBack() {
     const t = new THREE.CanvasTexture(c)
     t.colorSpace = THREE.SRGBColorSpace
     t.anisotropy = 8
-    const serif = (px: number, w = 500) => `${w} ${px}px Inter, "Pretendard Variable", sans-serif`
-    const mono = (px: number, w = 400) => `${w} ${px}px Inter, "Pretendard Variable", sans-serif`
+    const serif = (px: number) => `${px}px "Instrument Serif", serif`
+    const mono = (px: number, w = 400) => `${w} ${px}px "Courier Prime", monospace`
 
     const draw = () => {
       g.setTransform(S, 0, 0, S, 0, 0)
