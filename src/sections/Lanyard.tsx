@@ -23,6 +23,7 @@ const STRAP_W = 0.2
 const CAP_LEAD = 0.12 // 캡 위 이만큼은 끈이 곧게 들어감
 const CAP_STRAIGHTEN = 0.35 // 들어가는 방향: 0이면 끈이 오던 방향 그대로(V자), 1이면 카드 위쪽으로 똑바로(꺾임)
 const CAP_TUCK = 0.05 // 끈 끝을 캡 안으로 밀어 넣는 깊이 (단면 안 보이게)
+const END_GAP = 0.11 // 두 끈 끝이 캡 안에서 나란히 들어가도록 가운데서 벌리는 거리. 0이면 두 끈이 겹쳐 서로 뚫고 지나감
 const STRAP_T = 0.025 // 끈 두께
 const STRAP_TEX_LEN = 0.4 // 끈 텍스처 한 장이 덮는 길이 (unit)
 const RIBBON_STEPS = 48
@@ -222,7 +223,7 @@ function Badge() {
             <Metal />
           </mesh>
           {/* 두 끈 끝을 물고 있는 금속 캡 */}
-          <RoundedBox args={[0.26, 0.14, 0.07]} radius={0.02} position={[0, top + JOINT - 0.035, 0]} castShadow>
+          <RoundedBox args={[0.5, 0.14, 0.07]} radius={0.02} position={[0, top + JOINT - 0.035, 0]} castShadow>
             <Metal />
           </RoundedBox>
         </group>
@@ -282,7 +283,7 @@ function useFace() {
     tex.anisotropy = 8
     const links: { x: number; y: number; w: number; h: number; href: string }[] = []
     let photo: HTMLImageElement | undefined
-    const serif = (px: number) => `${px}px "Instrument Serif", serif`
+    const serif = (px: number, w = 500) => `${w} ${px}px Inter, "Pretendard Variable", sans-serif`
 
     const draw = () => {
       g.setTransform(S, 0, 0, S, 0, 0)
@@ -294,7 +295,7 @@ function useFace() {
       g.lineWidth = 0.5
       // 가는 세리프가 작은 카드에서 흐려지지 않게 획을 살짝 두껍게
       const text = (t: string, x: number, y: number) => { g.strokeStyle = g.fillStyle; g.fillText(t, x, y); g.strokeText(t, x, y) }
-      g.font = serif(30)
+      g.font = serif(28)
       profile.role.forEach((r, i) => text(r, 34, 59 + i * 36))
 
       const px = W - 34 - 104, py = 59
@@ -322,7 +323,7 @@ function useFace() {
       g.fillStyle = '#ccc'
       g.fillRect(34, 313, W - 68, 1)
       g.fillStyle = '#000'
-      g.font = serif(40)
+      g.font = serif(34, 600)
       text(`${profile.firstName} ${profile.lastName}`, 34, 329)
 
       g.font = serif(20)
@@ -364,8 +365,8 @@ function useBack() {
     const t = new THREE.CanvasTexture(c)
     t.colorSpace = THREE.SRGBColorSpace
     t.anisotropy = 8
-    const serif = (px: number) => `${px}px "Instrument Serif", serif`
-    const mono = (px: number, w = 400) => `${w} ${px}px "Courier Prime", monospace`
+    const serif = (px: number, w = 500) => `${w} ${px}px Inter, "Pretendard Variable", sans-serif`
+    const mono = (px: number, w = 400) => `${w} ${px}px Inter, "Pretendard Variable", sans-serif`
 
     const draw = () => {
       g.setTransform(S, 0, 0, S, 0, 0)
@@ -502,7 +503,7 @@ function useStrap(side: -1 | 1, card: BodyRef, tex: ReturnType<typeof strapTextu
       geo,
       // 마디 위치 + 캡 바로 위 보조점 1개: 끈이 캡에 사선으로 꽂히지 않고 똑바로 들어가게
       curve: new THREE.CatmullRomCurve3([...refs, null].map(() => new THREE.Vector3()), false, 'chordal'),
-      up: new THREE.Vector3(), lead: new THREE.Vector3(),
+      up: new THREE.Vector3(), lead: new THREE.Vector3(), off: new THREE.Vector3(),
       p: new THREE.Vector3(), tan: new THREE.Vector3(), side: new THREE.Vector3(), n: new THREE.Vector3(),
       cardX: new THREE.Vector3(), corners: [0, 1, 2, 3].map(() => new THREE.Vector3()),
     }
@@ -517,8 +518,9 @@ function useStrap(side: -1 | 1, card: BodyRef, tex: ReturnType<typeof strapTextu
     // 보조점 방향은 끈이 오던 방향과 카드 위쪽 사이 → 캡 바로 위에서 갑자기 꺾이지 않음
     r.up.set(0, 1, 0).applyQuaternion(cardRot)
     r.lead.subVectors(pts[SEGMENTS - 1], pts[SEGMENTS]).normalize().lerp(r.up, CAP_STRAIGHTEN).normalize()
-    pts[SEGMENTS + 1].copy(pts[SEGMENTS]).addScaledVector(r.up, -CAP_TUCK)
-    pts[SEGMENTS].addScaledVector(r.lead, CAP_LEAD)
+    r.off.set(side * END_GAP, 0, 0).applyQuaternion(cardRot) // 왼쪽 끈은 캡 왼쪽, 오른쪽 끈은 오른쪽으로
+    pts[SEGMENTS + 1].copy(pts[SEGMENTS]).add(r.off).addScaledVector(r.up, -CAP_TUCK)
+    pts[SEGMENTS].add(r.off).addScaledVector(r.lead, CAP_LEAD)
     r.curve.updateArcLengths()
     const len = r.curve.getLength()
     r.cardX.set(1, 0, 0).applyQuaternion(cardRot)
