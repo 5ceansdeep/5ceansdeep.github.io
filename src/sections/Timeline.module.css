@@ -50,6 +50,20 @@
 }
 .credentials span + span::before { content: '·'; margin-right: 20px; }
 
+/* 연락처: 맨 아래 한 줄 */
+.contact {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  max-width: 960px;
+  margin: 56px 0 0;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+.contact span { font: 700 12px/1 var(--type); letter-spacing: 0.06em; color: var(--accent); }
+.contact a { font: 800 clamp(22px, 2.6vw, 30px) / 1.15 var(--display); letter-spacing: -0.02em; color: var(--ink); text-decoration: none; }
+.contact a:hover { color: var(--accent); }
+
 @media (max-width: 700px) {
   .timeline { padding: 80px 16px; }
   .item { grid-template-columns: 1fr; gap: 8px; }

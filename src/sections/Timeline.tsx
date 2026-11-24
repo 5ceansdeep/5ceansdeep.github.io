@@ -1,4 +1,5 @@
 import { credentials, timeline } from '../data/timeline.ts'
+import { profile } from '../data/profile.ts'
 import s from './Timeline.module.css'
 
 export default function Timeline() {
@@ -22,6 +23,10 @@ export default function Timeline() {
       </ol>
       <p className={s.credentials}>
         {credentials.map((c) => <span key={c}>{c}</span>)}
+      </p>
+      <p className={s.contact}>
+        <span>CONTACT</span>
+        <a href={`mailto:${profile.email}`}>{profile.email}</a>
       </p>
     </section>
   )

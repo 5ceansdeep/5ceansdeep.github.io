@@ -3,7 +3,7 @@
   background:
     radial-gradient(40% 35% at 12% 85%, color-mix(in srgb, var(--sky) 55%, transparent), transparent 70%),
     var(--paper-2);
-  padding: clamp(72px, 10vw, 120px) clamp(16px, 5vw, 64px);
+  padding: 120px 64px;
   overflow-x: clip;
   word-break: keep-all;
 }
@@ -34,11 +34,10 @@
 .badge {
   position: sticky;
   top: 48px;
-  padding: 44px 22px 20px;
+  padding: 44px 23px 18px;
   background: #fff;
-  border-radius: 6px;
+  border-radius: 5px;
   box-shadow: 13px 5px 21.7px color-mix(in srgb, var(--ink) 22%, transparent);
-  rotate: -2deg;
 }
 .slot {
   position: absolute;
@@ -51,29 +50,24 @@
   background: var(--paper-2);
   box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.8);
 }
-.no { margin: 0; font: 11px/1 var(--type); letter-spacing: 0.12em; color: var(--muted); }
+.no { margin: 8px 0 0; font: 10px/1 var(--type); letter-spacing: 0.12em; color: var(--muted); }
 .thumb { margin-top: 16px; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 3px; }
 .thumb img { width: 100%; height: 100%; object-fit: cover; }
-.name {
-  margin: 18px 0 0;
-  font: 900 clamp(32px, 3.4vw, 42px) / 0.95 var(--display);
-  letter-spacing: -0.03em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-.summary { margin: 8px 0 0; font-size: 17px; line-height: 1.35; color: var(--ink); }
+.name { margin: 14px 0 0; text-wrap: balance; font-size: 32px; font-weight: 400; line-height: 1.1; }
+.summary { margin: 6px 0 0; font-size: 15px; line-height: 1.35; font-style: italic; color: var(--muted); }
 
 .info { margin: 18px 0 0; }
 .info div { display: flex; gap: 12px; padding: 8px 0; border-top: 1px solid var(--line); }
-.info dt { flex: none; width: 52px; font: 700 10px/1.6 var(--type); letter-spacing: 0.08em; color: var(--muted); }
+.info dt { flex: none; width: 52px; font: 10px/1.6 var(--type); letter-spacing: 0.08em; color: var(--muted); }
 .info dd { margin: 0; font-size: 15px; line-height: 1.3; }
 
 .links { display: flex; gap: 8px; margin-top: 16px; }
 .btn {
-  padding: 7px 14px;
+  padding: 6px 12px;
   border: 1px solid var(--accent);
   border-radius: 999px;
-  font: 700 13px/1 var(--type);
+  font-size: 14px;
+  line-height: 1;
   text-decoration: none;
   color: var(--accent);
   transition: background 0.15s, color 0.15s;
@@ -83,32 +77,32 @@
 
 /* ── 상세 ── */
 .tagsHead { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
-.label { margin: 0; font: 700 12px/1 var(--type); letter-spacing: 0.08em; color: var(--accent); }
+.label { margin: 0; font: 700 12px/1 var(--type); letter-spacing: 0.06em; color: var(--accent); }
 .hint { margin: 0; font: 400 13px/1 var(--type); color: var(--muted); }
 
-/* 기술 태그: 라벨 스티커처럼 각지고 크게. 누르면 형광펜 색 */
+/* 기술 태그: 원래 필터 태그 모양(알약), 크기만 키움. 누르면 accent */
 .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
 .tag {
-  padding: 9px 14px 8px;
-  border: 1.5px solid var(--ink);
-  border-radius: 3px;
-  background: #fff;
-  box-shadow: 3px 3px 0 var(--ink);
-  font: 700 15px/1 var(--type);
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: color-mix(in srgb, #fff 55%, transparent);
+  font: 14px/1 var(--type);
+  letter-spacing: 0.03em;
   color: var(--ink);
   cursor: pointer;
-  transition: translate 0.12s, box-shadow 0.12s, background 0.12s;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
 }
-.tag:hover { background: var(--pop); }
-.tag[aria-pressed='true'] { background: var(--pop); translate: 3px 3px; box-shadow: 0 0 0 var(--ink); }
-.tag.plain { border-style: dashed; border-color: var(--muted); box-shadow: none; background: transparent; color: var(--muted); font-weight: 400; cursor: default; }
+.tag:hover { background: var(--pop); border-color: var(--pop); }
+.tag[aria-pressed='true'] { background: var(--accent); border-color: var(--accent); color: #fff; }
+.tag.plain { border-style: dashed; background: transparent; color: var(--muted); cursor: default; }
 
 /* 구현 목록: 태그를 고르면 해당 줄에 형광펜, 나머지는 흐리게 */
 .highlights { margin: 32px 0 0; padding: 0; list-style: none; }
 .highlights li {
   padding: 12px 0;
   border-top: 1px solid var(--line);
-  font-size: clamp(17px, 1.6vw, 20px);
+  font-size: 17px;
   line-height: 1.45;
   transition: opacity 0.2s;
 }
@@ -122,16 +116,17 @@
 }
 
 .case { margin-top: 40px; }
-.caseTitle { margin: 0; font: 800 clamp(22px, 2.2vw, 28px) / 1.15 var(--display); letter-spacing: -0.02em; }
+.caseTitle { margin: 0; font: 800 clamp(22px, 2.6vw, 30px) / 1.15 var(--display); letter-spacing: -0.02em; color: var(--ink); }
 .caseBody { margin: 14px 0 0; }
 .caseBody div { display: grid; grid-template-columns: 88px 1fr; gap: 12px; padding: 10px 0; border-top: 1px solid var(--line); }
 .caseBody dt { font: 700 11px/1.8 var(--type); letter-spacing: 0.08em; color: var(--muted); }
-.caseBody dd { margin: 0; font-size: 17px; line-height: 1.5; }
+.caseBody dd { margin: 0; font-size: 17px; line-height: 1.45; }
 .caseBody .result { font-size: 20px; color: var(--accent); }
 
 @media (max-width: 860px) {
+  .projects { padding: 80px 16px; }
   .entry { grid-template-columns: 1fr; }
-  .badge { position: static; max-width: 300px; rotate: 0deg; }
+  .badge { position: static; max-width: 300px; }
   .tagsHead { flex-direction: column; gap: 8px; }
   .caseBody div { grid-template-columns: 1fr; gap: 4px; }
 }
