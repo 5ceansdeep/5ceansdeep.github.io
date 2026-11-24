@@ -3,7 +3,7 @@
   padding: 120px 64px;
   background:
     radial-gradient(45% 40% at 85% 20%, color-mix(in srgb, var(--sky) 55%, transparent), transparent 70%),
-    var(--paper);
+    var(--paper-2);
 }
 .inner { max-width: 1152px; }
 

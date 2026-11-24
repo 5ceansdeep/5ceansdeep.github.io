@@ -1,7 +1,6 @@
 /* Figma 시안 없음. History와 같은 섹션 머리 + 사례 3개를 세로 줄로 */
 .ai {
-  background: var(--paper-2);
-  word-break: keep-all;
+  background: var(--paper); /* 섹션 바탕 번갈아: Projects paper-2 → AI paper → GitHub paper-2 → History paper */
   padding: 120px 64px;
 }
 

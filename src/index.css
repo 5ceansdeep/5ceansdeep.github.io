@@ -67,6 +67,7 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: var(--serif);
+  word-break: keep-all; /* 한글을 단어 중간에서 끊지 않음 */
 }
 
 a { color: inherit; }
