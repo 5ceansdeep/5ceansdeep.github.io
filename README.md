@@ -7,7 +7,8 @@
 ## 이런 사이트예요
 
 - **3D 사원증 랜딩**: 목에 거는 사원증을 커서로 잡아당기고 흔들 수 있습니다. 끈은 길이가 고정된 10마디 링크, 카드는 잡은 지점을 스프링으로 당기는 물리 물체라 놓아도 튀지 않습니다.
-- **Projects**: 사원증 모양 카드가 화면에 들어오면 계단식으로 올라옵니다. 기술 스택 필터, 상세 보기(주요 구현 · 문제 → 해결 → 결과).
+- **Projects**: 사원증 모양 카드가 화면에 들어오면 계단식으로 올라옵니다. 기술 스택 필터, 상세 보기(발표 영상 · 주요 구현 · 문제 → 해결 → 결과).
+- **With AI**: 서비스 안에 AI를 넣은 사례와, AI로 일하면서 맥락 관리 · 검증을 어떻게 하는지.
 - **GitHub**: 최근 1년 기여 그래프, 대표 레포. 데이터를 못 불러오면 대체 화면과 프로필 링크를 보여 줍니다.
 - **History**: 굵직한 경험 4개와 학력 · 자격.
 - **Color**: 오른쪽 아래 버튼으로 사이트 색을 바꿀 수 있습니다(Oxblood / Acid / Aubergine). 3D 끈 색까지 같이 바뀝니다.
@@ -38,11 +39,12 @@ src/
   App.tsx                 섹션 순서
   index.css               색 토큰(팔레트) · 공통 스타일
   palette.ts              팔레트 목록 · 선택 저장
-  data/                   profile · projects · timeline (내용은 여기만 고치면 됨)
+  data/                   profile · projects · ai · timeline (내용은 여기만 고치면 됨)
   sections/
     Landing.tsx           이름 + 3D 사원증
     Lanyard.tsx           3D 씬: 끈 · 카드 물리, 끈 직조 텍스처, 카드 앞면 텍스처
-    Projects.tsx          프로젝트 카드 · 필터 · 상세 팝업
+    Projects.tsx          프로젝트 카드 · 필터 · 상세 팝업(발표 영상)
+    Ai.tsx                With AI 사례
     Github.tsx            GitHub 활동 패널
     Timeline.tsx          History
     PaletteSwitch.tsx     색 바꾸기 버튼
