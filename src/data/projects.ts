@@ -1,4 +1,4 @@
-// 대표 프로젝트만. 새 프로젝트는 배열에 추가하면 카드가 하나 더 생김
+// 새 프로젝트는 배열에 추가하면 카드가 하나 더 생김
 export type Case = {
   title: string
   problem: string
@@ -53,5 +53,46 @@ export const projects: Project[] = [
         result: '공유 링크에 카드 미리보기 표시',
       },
     ],
+  },
+  {
+    name: 'Saymary',
+    summary: 'AI 음성 요약 서비스',
+    period: '2025.07 — 2025.09', // GitHub 레포 커밋 기간 기준
+    role: 'Frontend · 웹 소모임 토이 프로젝트',
+    stack: ['React', 'JavaScript', 'Create React App', 'Vercel'],
+    github: 'https://github.com/5ceansdeep/saymary_frontend',
+    highlights: [
+      { text: '웹 개발 동아리 ComWith 소모임 토이 프로젝트, 소규모 프로젝트 최우수 선정', uses: ['React', 'JavaScript'] },
+    ],
+    cases: [],
+  },
+  {
+    name: '회의실 예약 사이트',
+    summary: '로그인 없이 외부인이 신청하고 관리자가 승인하는 공개 예약 서비스',
+    period: '2026.11 — 진행 중',
+    role: 'Frontend · 기획 · 2인 개발',
+    stack: ['React', 'TypeScript', 'Vite', 'React Router', 'Tailwind CSS', 'Figma'], // 본인 담당(프론트·디자인)만. 백엔드는 팀원
+    // 레포 비공개 → 링크 없음. 회사 프로젝트라 회사·고객사 이름, 내부 요구사항·수치는 빼고 맡은 역할만
+    highlights: [
+      { text: 'PRD 공동 작성, 디자인 시스템과 Figma 프로토타입 제작', uses: ['Figma'] },
+      { text: 'API 응답 명세 설계와 ERD 검토', uses: [] },
+      { text: '예약 조회·신청·관리자 승인 화면 개발', uses: ['React', 'TypeScript', 'Vite', 'React Router', 'Tailwind CSS'] },
+    ],
+    cases: [],
+  },
+  {
+    name: '띠링인캠퍼스',
+    summary: '흩어진 교내 공지를 한곳에서 보는 학내 공지 통합 플랫폼',
+    period: '2025.04 — 2026.01',
+    role: 'Frontend · 기획 · 창업동아리 멋진으른',
+    stack: ['React', 'Figma'],
+    highlights: [
+      { text: '여러 기관 사이트의 공지를 한곳에서 조회·필터·알림', uses: [] },
+      { text: '사용자 설문과 페르소나로 MVP 기능 우선순위 결정, DAU·MAU·리텐션 지표 설계', uses: [] },
+      { text: 'Figma UI 설계와 React 프론트엔드 개발, 백엔드 팀원과 API 협업', uses: ['Figma', 'React'] },
+      { text: '제9기 INU Startup Frontier 참여, 싱가포르 연수에서 유학생 대상 다국어 확장 검토', uses: [] },
+      { text: 'MVP까지 구현, 팀 해체로 배포 전 중단', uses: [] },
+    ],
+    cases: [],
   },
 ]
