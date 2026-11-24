@@ -1,0 +1,67 @@
+/* Figma 시안 없음. History와 같은 섹션 머리 + 사례 3개를 세로 줄로 */
+.ai {
+  background: var(--paper-2);
+  word-break: keep-all;
+  padding: 120px 64px;
+}
+
+.head { margin-bottom: 48px; }
+.lede {
+  max-width: 640px;
+  margin: 24px 0 0;
+  font-size: 22px;
+  line-height: 1.4;
+  color: var(--ink);
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  padding-top: 20px;
+  border-top: 2px solid var(--accent);
+}
+
+.where {
+  margin: 0;
+  font: 700 12px/1.3 var(--type);
+  letter-spacing: 0.06em;
+  color: var(--accent);
+}
+.title {
+  margin: 10px 0 0;
+  font: 800 clamp(22px, 2.2vw, 28px) / 1.15 var(--display);
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.body { margin: 20px 0 0; }
+.body div + div { margin-top: 14px; }
+.body dt { font: 700 11px/1 var(--type); letter-spacing: 0.06em; color: var(--muted); }
+.body dd { margin: 6px 0 0; font-size: 17px; line-height: 1.45; color: var(--ink); }
+
+.tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 18px 0 0;
+}
+.tools span {
+  padding: 2px 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font: 400 12px/1.4 var(--type);
+  color: var(--ink);
+}
+
+@media (max-width: 900px) {
+  .ai { padding: 80px 16px; }
+  .list { grid-template-columns: 1fr; gap: 32px; }
+}

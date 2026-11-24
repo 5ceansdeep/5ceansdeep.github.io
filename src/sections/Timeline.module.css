@@ -1,0 +1,56 @@
+/* Figma 시안 없음. 섹션 공통 머리(eyebrow·display) + 굵직한 경험 4줄 + 학력·자격 한 줄 */
+.timeline {
+  background: var(--paper);
+  padding: 120px 64px;
+}
+
+.head { margin-bottom: 40px; }
+
+.list {
+  max-width: 960px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 32px;
+  padding: 28px 0;
+  border-top: 1px solid var(--line);
+}
+.item:last-child { border-bottom: 1px solid var(--line); }
+
+.date {
+  padding-top: 8px;
+  font: 700 12px/1 var(--type);
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  white-space: nowrap;
+}
+.title {
+  margin: 0;
+  font: 800 clamp(22px, 2.6vw, 30px) / 1.15 var(--display);
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.org { margin: 6px 0 0; font: 700 13px/1.3 var(--type); color: var(--muted); }
+.desc { max-width: 640px; margin: 10px 0 0; font-size: 17px; line-height: 1.45; color: var(--ink); }
+
+/* 학력·자격: 타자기 한 줄 */
+.credentials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+  max-width: 960px;
+  margin: 24px 0 0;
+  font: 400 13px/1.4 var(--type);
+  color: var(--muted);
+}
+.credentials span + span::before { content: '·'; margin-right: 20px; }
+
+@media (max-width: 700px) {
+  .timeline { padding: 80px 16px; }
+  .item { grid-template-columns: 1fr; gap: 8px; }
+}

@@ -1,0 +1,61 @@
+/* 레퍼런스 믹스: ① 번진 하늘빛 배경·타자기 라벨 ② 굵은 대문자 이름 ③ 종이 결 (종이 결은 전역 .paper)
+   색은 전부 src/index.css 토큰 */
+.landing {
+  height: 100vh;
+  min-height: 640px;
+  overflow: hidden;
+  background:
+    radial-gradient(55% 50% at 50% 38%, color-mix(in srgb, var(--sky) 85%, var(--accent)) 0%, var(--sky) 35%, transparent 75%),
+    radial-gradient(40% 35% at 18% 70%, color-mix(in srgb, var(--sky) 60%, transparent), transparent 70%),
+    radial-gradient(40% 35% at 85% 75%, color-mix(in srgb, var(--sky) 50%, transparent), transparent 70%),
+    var(--paper);
+}
+
+/* 이름 (②): 아래쪽 두 줄, 굵은 고딕 */
+.name {
+  position: absolute;
+  left: 2.5vw;
+  bottom: 2vh;
+  z-index: 3;
+  margin: 0;
+  font: 900 min(19vw, 31vh) / 0.82 var(--display);
+  letter-spacing: -0.045em;
+  text-transform: uppercase;
+  color: var(--accent);
+  white-space: nowrap;
+  pointer-events: none;
+}
+.name span { display: block; }
+/* 사원증 앞에 겹치는 외곽선 레이어 */
+.outline {
+  z-index: 5;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--accent);
+}
+
+/* ① 타자기 라벨 */
+.label {
+  position: absolute;
+  z-index: 6;
+  margin: 0;
+  font: 700 15px/1 var(--type);
+  letter-spacing: 0.04em;
+  color: color-mix(in srgb, var(--accent) 45%, var(--sky));
+  pointer-events: none;
+}
+.tl { top: 28px; left: 32px; }
+.tr { top: 28px; right: 32px; }
+.br { bottom: 76px; right: 32px; /* 아래는 Color 버튼 자리 */ color: #fff; text-shadow: 0 1px 6px color-mix(in srgb, var(--accent) 40%, transparent); }
+.hint { top: 60%; left: calc(50% + 150px); padding: 5px 8px; background: var(--pop); color: var(--ink); }
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+@media (max-width: 700px) {
+  .hint { display: none; }
+}
