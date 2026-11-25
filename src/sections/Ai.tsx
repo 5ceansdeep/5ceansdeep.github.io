@@ -7,7 +7,7 @@ export default function Ai() {
       <div className={s.head}>
         <p className="eyebrow">02 — With AI</p>
         <h2 id="ai-title" className="display">With AI.</h2>
-        <p className={s.lede}>AI에게 일을 맡기는 것보다, AI가 일관되게 일하도록 맥락과 규칙을 설계하고 결과를 숫자와 테스트로 확인하는 데 시간을 씁니다.</p>
+        <p className={s.lede}>AI에게 그냥 맡기지 않습니다. 맥락과 규칙을 설계해 일관되게 일하게 하고, 결과는 숫자와 테스트로 확인합니다.</p>
       </div>
       <ol className={s.list}>
         {aiCases.map((c) => (

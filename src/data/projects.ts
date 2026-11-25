@@ -44,7 +44,7 @@ export const projects: Project[] = [
         title: '추천 정확도 개선',
         problem: '정답 곡이 추천 상위 5곡 안에 드는 비율(재현율)이 낮았다.',
         solution: '평가 세트를 만들어 시도마다 재현율을 재고, 곡 풀 평균 보정·LLM 재정렬·편지 해석 개선을 차례로 적용. 수치가 떨어진 시도 3건은 되돌림.',
-        result: '곡 풀 평균 보정 43% → 68%',
+        result: '재현율 43% → 68% (곡 풀 평균 보정 기준)',
       },
       {
         title: '3D 화면과 링크 미리보기 분리',
@@ -92,7 +92,7 @@ export const projects: Project[] = [
       '사용자 설문과 페르소나로 MVP 기능 우선순위 결정, DAU·MAU·리텐션 지표 설계',
       'Figma UI 설계와 React 프론트엔드 개발, 백엔드 팀원과 API 협업',
       '제9기 INU Startup Frontier 참여, 싱가포르 연수에서 유학생 대상 다국어 확장 검토',
-      'MVP까지 구현, 팀 해체로 배포 전 중단',
+      'MVP 구현 완료, 팀 사정으로 배포 전 종료',
     ],
     cases: [],
   },
