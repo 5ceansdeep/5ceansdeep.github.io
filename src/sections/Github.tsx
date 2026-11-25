@@ -113,7 +113,7 @@ function Graph({ days }: { days: Day[] }) {
   })
   return (
     <figure className={s.graph}>
-      <div className={s.scroll}>
+      <div className={s.scroll} ref={(el) => { if (el) el.scrollLeft = el.scrollWidth }}>
         <div className={s.months} aria-hidden>
           {months.map((m) => <span key={m.col} style={{ gridColumn: m.col + 1 }}>{m.label}</span>)}
         </div>

@@ -57,5 +57,8 @@
 }
 
 @media (max-width: 700px) {
-  .hint { display: none; }
+  .hint, .br { display: none; }
+  .name { left: 16px; bottom: 76px; font-size: 17vw; } /* 아래 76px = Color 버튼 자리 */
+  .tl { left: 16px; } .tr { right: 16px; }
+  .label { font-size: 13px; }
 }

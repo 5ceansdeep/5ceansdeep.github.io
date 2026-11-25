@@ -32,3 +32,8 @@
 }
 .swatch:hover { scale: 1.12; }
 .swatch[aria-pressed='true'] { outline: 2px solid var(--ink); outline-offset: 1px; }
+
+@media (max-width: 700px) {
+  .switch { right: 16px; bottom: 16px; padding: 5px 6px 5px 10px; }
+  .swatch { width: 20px; height: 20px; }
+}

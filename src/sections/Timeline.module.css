@@ -53,4 +53,6 @@
 @media (max-width: 700px) {
   .timeline { padding: 80px 16px; }
   .item { grid-template-columns: 1fr; gap: 8px; }
+  .credentials { flex-direction: column; }
+  .credentials span + span::before { content: none; }
 }
