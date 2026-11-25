@@ -122,7 +122,6 @@
 .summary {
   margin: 4px 0 0;
   font-size: 13px;
-  font-style: italic;
   color: var(--muted);
 }
 
@@ -233,4 +232,11 @@ a.btn.primary:hover { background: var(--pop); border-color: var(--pop); color: v
   .filters { justify-content: flex-start; }
   .cards { padding: 40px 0 0; flex-wrap: wrap; justify-content: center; gap: 32px; }
   .card:nth-child(n) { transform: none; }
+}
+
+/* 모바일 팝업: 여백 줄이고, 문제·해결·결과는 라벨 위 / 내용 아래로 */
+@media (max-width: 700px) {
+  .dialog { padding: 20px; }
+  .video { margin: -20px -20px 20px; }
+  .case .info div { flex-direction: column; gap: 6px; }
 }

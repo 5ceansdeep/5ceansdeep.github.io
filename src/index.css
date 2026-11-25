@@ -58,8 +58,8 @@
 
 :root {
   --display: 'Inter Tight', 'Helvetica Neue', Arial, sans-serif;
-  --serif: 'Instrument Serif', serif;
-  --type: 'Courier Prime', ui-monospace, monospace;
+  --serif: 'Instrument Serif', 'Gowun Batang', serif;
+  --type: 'Courier Prime', 'Nanum Gothic Coding', ui-monospace, monospace;
 }
 
 body {
